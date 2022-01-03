@@ -1,0 +1,270 @@
+inp w
+mul x 0
+add x z  
+mod x 26
+div z 1
+add x 10  x0 = 10
+set x 1   x0 = 1
+mul y 0   
+add y 25
+mul y x
+add y 1   y0 = 26
+mul z y   z0 = 0
+mul y 0  
+add y w   
+add y 2   
+mul y x   y0 = w0 + 2
+add z y   z0 = w0 + 2
+
+z0 >= 3
+
+inp w
+mul x 0   
+add x z   x1 = z0
+mod x 26  x1 = z0
+div z 1   z1 = z0
+add x 15  x1 = z0 + 15
+set x 1   x1 = 1
+mul y 0
+add y 25  
+mul y x   
+add y 1   y1 = 26
+mul z y   z1 = 26 * z0
+mul y 0
+add y w   
+add y 16  
+mul y x   y1 = w1 + 16
+add z y   z1 = 26 * z0 + (w1 + 16)
+
+z1 >= 3 * 26
+
+inp w
+mul x 0
+add x z   
+mod x 26  
+div z 1   z2 = z1
+add x 14  x2 = z1 mod 26 + 14
+set x 1   x2 = 1
+mul y 0
+add y 25
+mul y x 
+add y 1   y2 = 26
+mul z y   z2 = 26 * z1
+mul y 0
+add y w
+add y 9   
+mul y x   y2 = w2 + 9
+add z y   z2 = 26 * z1 + w2 + 9
+
+z2 >= 3 * 26^2
+
+inp w
+mul x 0
+add x z 
+mod x 26  
+div z 1   z3 = z2
+add x 15  x3 = z2 mod 26 + 15
+set x 1   x3 = 1
+mul y 0
+add y 25
+mul y x
+add y 1   y3 = 26
+mul z y   z3 = 26 * z2
+mul y 0
+add y w
+add y 0   
+mul y x   y3 = w3
+add z y   z3 = 26 * z2 + w3
+
+z3 >= 3 * 26^3
+
+inp w
+mul x 0   
+add x z   
+mod x 26  x4 = w3
+div z 26  z4 = z2
+add x -8  x4 = w3 - 8
+neq x w   x4 = if w4 == w3 - 8 then 0 else 1
+mul y 0
+add y 25  y4 = 25
+mul y x   
+add y 1   y4 = if w4 == w3 - 8 then 1 else 26
+mul z y   z4 = if w4 == w3 - 8 then z2 else 26 * z2
+mul y 0
+add y w
+add y 1   
+mul y x   y4 = if w4 == w3 - 8 then 0 else w4 + 1
+add z y   z4 = if w4 == w3 - 8 then z2 else 26 * z2 + (w4 + 1)
+
+
+inp w
+mul x 0
+add x z
+mod x 26
+div z 1   z5 = z4
+add x 10  x5 = z4 mod 26 + 10
+neq x w   x5 = 1
+mul y 0   
+add y 25
+mul y x  
+add y 1   y5 = 26
+mul z y   z5 = 26 * z4
+mul y 0
+add y w
+add y 12  
+mul y x   y5 = w5 + 12
+add z y   z5 = 26 * z4 + (w5 + 12)
+
+
+inp w
+mul x 0
+add x z
+mod x 26   x6 = w5 + 12
+div z 26   z6 = z4
+add x -16  x6 = w5 - 4
+neq x w    x6 = if w6 == w5 - 4 then 0 else 1
+mul y 0
+add y 25
+mul y x  
+add y 1    y6 = if w6 == w5 - 4 then 1 else 26
+mul z y    z6 = if w6 == w5 - 4 then z4 else 26 * z4
+mul y 0
+add y w
+add y 6   
+mul y x    y6 = if w6 == w5 - 4 then 0 else w6 + 6 
+add z y    z6 = if w6 == w5 - 4 then z4 else 26 * z4 + (w6 + 6) 
+
+
+inp w
+mul x 0
+add x z
+mod x 26
+div z 26   z7 = z6 div 26
+add x -4   x7 = z6 mod 26 - 4
+neq x w    x7 = if w7 + 4 == z6 mod 26 then 0 else 1
+mul y 0
+add y 25
+mul y x
+add y 1    y7 = if w7 + 4 == z6 mod 26 then 1 else 26
+mul z y    z7 = if w7 + 4 == z6 mod 26 then z6 div 26 else 26 * (z6 div 26)
+mul y 0
+add y w
+add y 6
+mul y x    y7 = if w7 + 4 == z6 mod 26 then 0 else (w7 + 6)
+add z y    z7 = if w7 + 4 == z6 mod 26 then z6 div 26 else 26 * (z6 div 26) + (w7 + 6)
+
+
+inp w
+mul x 0
+add x z
+mod x 26
+div z 1    z8 = z7
+add x 11   x8 = z7 mod 26 + 11
+neq x w    x8 = 1
+mul y 0
+add y 25
+mul y x 
+add y 1    y8 = 26
+mul z y    z8 = 26 * z7
+mul y 0
+add y w
+add y 3
+mul y x    y8 = w8 + 3
+add z y    z8 = 26 * z7 + (w8 + 3)
+
+
+inp w
+mul x 0
+add x z
+mod x 26
+div z 26   z9 = z7
+add x -3   x9 = w8
+neq x w    x9 = if w9 == w8 then 0 else 1
+mul y 0
+add y 25
+mul y x
+add y 1    y9 = if w9 == w8 then 1 else 26
+mul z y    z9 = if w9 == w8 then z7 else 26 * z7
+mul y 0
+add y w
+add y 5
+mul y x   y9 = if w9 == w8 then 0 else (w9 + 5)
+add z y   z9 = if w9 == w8 then z7 else 26 * z7 + (w9 + 5)
+
+
+inp w
+mul x 0    
+add x z    
+mod x 26   
+div z 1    z10 = z9
+add x 12   x10 = z9 mod 26 + 12
+neq x w    x10 = 1
+mul y 0
+add y 25   
+mul y x    
+add y 1    y10 = 26
+mul z y    z10 = 26 * z9
+mul y 0
+add y w    
+add y 9    
+mul y x    y10 = w10 + 9
+add z y    z10 = 26 * z9 + w10 + 9
+
+
+inp w
+mul x 0
+add x z    
+mod x 26
+div z 26   z11 = z9
+add x -7   x11 = w10 + 2
+neq x w    x11 = if w11 == w10 + 2 then 0 else 1
+mul y 0
+add y 25
+mul y x    
+add y 1    y11 = if w11 == w10 + 2 then 1 else 26
+mul z y    z11 = if w11 == w10 + 2 then z9 else  26 * z9
+mul y 0
+add y w
+add y 3    y11 = w11 + 3
+mul y x    y11 = if w11 == w10 + 2 then 0 else w11 + 3
+add z y    z11 = if w11 == w10 + 2 then z9 else 26 * z9 + w11 + 3
+
+
+inp w
+mul x 0
+add x z   
+mod x 26   
+div z 26   z12 = z11 div 26
+add x -15  x12 = z11 mod 26 - 15 
+neq x w    x12 = if w12 + 15 == z11 mod 26 then 0 else 1
+mul y 0   
+add y 25   
+mul y x    
+add y 1    y12 = if w12 + 15 == z11 mod 26 then 1 else 26
+mul z y    z12 = if w12 + 15 == z11 mod 26 then z11 div 26 else 26 * (z11 div 26)
+mul y 0
+add y w    
+add y 2    
+mul y x    y12 = if w12 + 15 == z11 mod 26 then 0 else (w12 + 2)
+add z y    z12 = if w12 + 15 == z11 mod 26 then z11 div 26 else 26 * (z11 div 26) + (w12 + 2)
+
+           
+inp w
+mul x 0
+add x z    
+mod x 26   
+div z 26   z13 = z12 div 26
+add x -7   x13 = z12 mod 26 - 7
+neq x w    x13 = if w13 + 7 == z12 mod 26 then 0 else 1
+mul y 0
+add y 25   
+mul y x    
+add y 1    y13 = if w13 + 7 == z12 mod 26 then 1 else 26
+mul z y    z13 = if w13 + 7 == z12 mod 26 then z12 div 26 else 26 * (z12 div 26)
+mul y 0    
+add y w    
+add y 3    
+mul y x    y13 = if w13 + 7 == z12 mod 26 then 0 else (w13 + 3)
+add z y    z13 = if w13 + 7 == z12 mod 26 then z12 div 26 else 26 * (z12 div 26) + (w13 + 3)
+
+w13 + 7 == z12 mod 26, 0 <= z12 <= 25

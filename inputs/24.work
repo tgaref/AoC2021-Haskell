@@ -1,0 +1,49 @@
+z0 = w0 + 2
+  3 <= z0 <= 11
+
+z1 = 26 * z0 + (w1 + 16)
+  z1 >= 3 * 26
+
+z2 = 26 * z1 + w2 + 9
+  z2 >= 3 * 26^2
+
+z3 = 26 * z2 + w3
+  z3 >= 3 * 26^3
+
+z4 = if w4 == w3 - 8 then z2 else 26 * z2 + (w4 + 1)
+  w4 == w3 - 8, z4 = z2
+
+z5 = 26 * z4 + (w5 + 12)
+  
+
+z6 = if w6 == w5 - 4 then z4 else 26 * z4 + (w6 + 6)
+     if w6 == w5 - 4 then z2 else 26 * z2 + (w6 + 6)
+  w6 == w5 - 4, z6 = z2
+
+
+z7 = if w7 + 4 == z6 mod 26 then z6 div 26 else 26 * (z6 div 26) + (w7 + 6)
+     if w7 == w2 + 5 then z1 else 26 * z1 + (w7 + 6)
+  w7 == w2 + 5, z7 = z1
+
+z8 = 26 * z7 + (w8 + 3)
+  
+
+z9 = if w9 == w8 then z7 else 26 * z7 + (w9 + 5)
+     if w9 == w8 then z1 else 26 * z1 + (w9 + 5)
+  w9 == w8, z9 = z1
+
+z10 = 26 * z9 + w10 + 9
+
+
+z11 = if w11 == w10 + 2 then z9 else 26 * z9 + w11 + 3
+      if w11 == w10 + 2 then z1 else 26 * z1 + w11 + 3
+  w11 == w10 + 2, z11 = z1
+
+z12 = if w12 + 15 == z11 mod 26 then z11 div 26 else 26 * (z11 div 26) + (w12 + 2)
+      if w12 + 15 == w1 + 16 then z0 else 26 * z0 + (w12 + 2)
+  w12 == w1 + 1, z12 = z0
+
+z13 = if w13 + 7 == z12 mod 26 then z12 div 26 else 26 * (z12 div 26) + (w13 + 3)
+      if w13 + 7 == w0 + 2 then 0 else w13 + 3
+
+  w13 == w0 - 5, 0 <= z12 <= 25
